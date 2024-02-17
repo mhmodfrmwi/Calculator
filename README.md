@@ -41,7 +41,7 @@ This project is a simple calculator web application with a responsive design. It
 
 
 ## live-server
-### https://calculator-one-eta-57.vercel.app/
+### [https://calculator-one-eta-57.vercel.app/](https://calculator-second-version.vercel.app/)
 
 
 ## Screenshot
