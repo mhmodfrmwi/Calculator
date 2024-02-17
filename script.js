@@ -49,6 +49,7 @@ const handleNumberInput = (keyElement) => {
 };
 
 // Perform addition operation
+
 const handleAddition = () => {
   let firstValue = Number(storedValue);
   let secondValue = Number(currentValue);
@@ -77,6 +78,41 @@ const handleDivision = () => {
 };
 
 // Handle different types of operations based on the key element value
+const equalHandler = () => {
+  let resultValue;
+  switch (operatorValue) {
+    case "+":
+      resultValue = handleAddition();
+      break;
+    case "-":
+      resultValue = handleSubtraction();
+      break;
+    case "*":
+      resultValue = handleMultiplication();
+      break;
+    case "/":
+      resultValue = handleDivision();
+      break;
+  }
+  resultField.textContent = resultValue;
+  console.log(resultValue);
+  storedValue = "";
+  currentValue = resultValue;
+};
+const clearHandler = () => {
+  storedValue = "";
+  currentValue = "0";
+  operatorValue = "";
+  resultField.textContent = "0";
+};
+const deleteHandler = () => {
+  if (currentValue.length > 1) {
+    currentValue = currentValue.slice(0, -1);
+  } else {
+    currentValue = "0";
+  }
+  resultField.textContent = currentValue;
+};
 const handleOperationInput = (keyElement) => {
   const value = keyElement.dataset.value;
   switch (value) {
@@ -84,50 +120,26 @@ const handleOperationInput = (keyElement) => {
     case "-":
     case "*":
     case "/":
+      if (operatorValue) {
+        equalHandler();
+      }
       operatorValue = value;
       storedValue = currentValue;
       currentValue = "0";
       break;
     case "c":
-      storedValue = "";
-      currentValue = "0";
-      operatorValue = "";
-      resultField.textContent = "0";
+      clearHandler();
       break;
     case "Enter":
-      let resultValue;
-      switch (operatorValue) {
-        case "+":
-          resultValue = handleAddition();
-          break;
-        case "-":
-          resultValue = handleSubtraction();
-          break;
-        case "*":
-          resultValue = handleMultiplication();
-          break;
-        case "/":
-          resultValue = handleDivision();
-          break;
-      }
-      resultField.textContent = resultValue;
-      console.log(resultValue);
-      storedValue = "";
-      currentValue = resultValue;
+      equalHandler();
       break;
     case "Backspace":
-      if (currentValue.length > 1) {
-        currentValue = currentValue.slice(0, -1);
-      } else {
-        currentValue = "0";
-      }
-      resultField.textContent = currentValue;
+      deleteHandler();
       break;
     default:
       break;
   }
 };
-
 // Handle key events and call the appropriate handler
 const keyHandler = (keyElement) => {
   if (keyElement.dataset.type === "number") {
