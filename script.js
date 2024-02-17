@@ -152,6 +152,8 @@ const keyHandler = (keyElement) => {
 // Attach click event listeners to key elements
 keyElements.forEach((keyElement) => {
   keyElement.addEventListener("click", () => {
+    keyElement.classList.add("hover");
+    setTimeout(() => keyElement.classList.remove("hover"), 100);
     keyHandler(keyElement);
   });
 });
@@ -160,6 +162,8 @@ keyElements.forEach((keyElement) => {
 document.addEventListener("keydown", (event) => {
   keyElements.forEach((keyElement) => {
     if (keyElement.dataset.value === event.key) {
+      keyElement.classList.add("hover");
+      setTimeout(() => keyElement.classList.remove("hover"), 100);
       keyHandler(keyElement);
     }
   });
